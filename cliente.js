@@ -9,12 +9,20 @@ client.connect(3000, '127.0.0.1', async () => {
     try{
         const memInfo = await si.mem();
         const diskInfo = await si.fsSize();
-        const disk1 = diskInfo[0];
-        client.write(`Mémoria RAM livre: ${memInfo.free}\n`);
-        client.write(`Espaço em disco livre: ${disk1.available}`);
+        const tempInfo = await si.cpuTemperature();
+        const cpuInfo = await si.cpu();
+
+        const disk1 = diskInfo[0]; // Pega a informação do primeiro disco - Geralmente o disco C.
+
+        client.write(`Mémoria RAM livre: ${memInfo.free}`);
+        client.write(`Espaço em disco livre: ${disk1.available}\n`);
+        client.write(`Temperatura:  ${tempInfo.main}\n`); 
+        client.write(`Cores:  ${cpuInfo.cores}`); 
+
     } catch {
         console.error('Erro ao obter informações de memória: ', error);
     } finally{
+        console.log("Dados enviados com sucesso!");
         client.end();
     }
     
