@@ -14,11 +14,12 @@ client.bind(() => {
 async function getSystemInfo() {
     try {
         const diskInfo = await si.fsSize(); // Aguarda os dados do disco
+        const diskFreeGB = (diskInfo[0].available / (1024 ** 3)).toFixed(2);
         return JSON.stringify({
             hostname: os.userInfo().username,
             freeMemory: (os.freemem() / (1024 ** 3)).toFixed(2),
             cpuCores: os.cpus().length,
-            diskFree: diskInfo[0].available, // Pega espaço disponível no primeiro disco
+            diskFree: diskFreeGB, // Pega espaço disponível no primeiro disco (diskInfo[0].available / (1024 ** 3)).toFixed(2)
         });
     } catch (error) {
         console.error("Erro ao obter informações do sistema:", error);
