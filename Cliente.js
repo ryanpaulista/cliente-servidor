@@ -1,30 +1,36 @@
 const dgram = require("dgram");
 const os = require("os");
+const si = require("systeminformation");
 
-const BROADCAST_ADDR = "255.255.255.255";
+const BROADCAST_ADDR = "10.25.255.255"; // Troque pelo IP correto, ex: "172.25.111.255"
 const PORT = 41234;
-const INTERVAL = 10000; // Enviar a cada 5 segundos
+const INTERVAL = 10000; // Enviar a cada 10 segundos
 
 const client = dgram.createSocket("udp4");
 client.bind(() => {
     client.setBroadcast(true);
 });
 
-function getSystemInfo() {
-    return JSON.stringify({
-        hostname: os.hostname(),
-        freeMemory: os.freemem(),
-        totalMemory: os.totalmem(),
-        cpuCores: os.cpus().length,
-        loadAvg: os.loadavg(),
-        diskFree: "N/A", // Para pegar info de disco, seria necessário uma lib como 'diskusage'
-    });
+async function getSystemInfo() {
+    try {
+        const diskInfo = await si.fsSize(); // Aguarda os dados do disco
+        return JSON.stringify({
+            hostname: os.userInfo().username,
+            freeMemory: (os.freemem() / (1024 ** 3)).toFixed(2),
+            cpuCores: os.cpus().length,
+            diskFree: diskInfo[0].available, // Pega espaço disponível no primeiro disco
+        });
+    } catch (error) {
+        console.error("Erro ao obter informações do sistema:", error);
+        return JSON.stringify({ error: "Falha ao coletar dados do sistema" });
+    }
 }
 
-setInterval(() => {
-    const message = Buffer.from(getSystemInfo());
+async function sendSystemInfo() {
+    const message = Buffer.from(await getSystemInfo());
     client.send(message, 0, message.length, PORT, BROADCAST_ADDR, (err) => {
         if (err) console.error("Erro ao enviar:", err);
     });
-}, INTERVAL);
+}
 
+setInterval(sendSystemInfo, INTERVAL);
