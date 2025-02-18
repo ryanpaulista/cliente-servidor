@@ -1,9 +1,16 @@
 {
+    "10.25.2.117": {
+        "hostname": "20241014040020",
+        "freeMemory": 11074748416,
+        "cpuCores": 4,
+        "diskFree": 160761470976,
+        "lastUpdate": 1739884007002
+    },
     "10.25.1.90": {
         "hostname": "20241014040020",
-        "freeMemory": 9765089280,
+        "freeMemory": 9437212672,
         "cpuCores": 4,
-        "diskFree": 179171119104,
-        "lastUpdate": 1739881603590
+        "diskFree": 179107151872,
+        "lastUpdate": 1739884012075
     }
 }

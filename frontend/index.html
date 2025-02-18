@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações</title>
+
+</head>
+<body>
+
+    <h1>Informações Coletadas</h1>
+    
+    <main>
+
+
+
+    </main>
+
+    <script>
+
+        async function loadInfo(){
+            try {
+                const response = await fetch(('http://localhost:3000/api/info'));
+                const data = await response.json();
+
+                const container = document.getElementsByName('main');
+
+                container.innerHTML = '';
+
+                Object.keys(data).forEach(ip => {
+                    const computer = data[ip];
+
+                    const computerInfo = `
+                    
+                    <div>
+                    
+                        <h2>Computador: ${ip}</h2>
+
+                        <h3>Matrícula: ${hostname}</h3>
+
+                        <p>Memória RAM livre: ${computer.freeMemory}</p>
+                        <p>Cores: ${computer.cpuCores}</p>
+                        <p>Mémoria de Disco livre: ${computer.diskFree}</p>
+                        
+                    </div>
+                    
+                    `
+
+                    container.innerHTML+=computerInfo;
+
+                }) 
+
+            } catch (error) {
+                console.error('Erro ao carregar as informações!', error);
+                document.getElementsByName('main').innerHTML = '<p>Erro ao carregar os dados</p>';
+            }
+
+        }
+
+        loadInfo();
+
+    </script>
+
+</body>
+</html>
