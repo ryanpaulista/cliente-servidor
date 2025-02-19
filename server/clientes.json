@@ -1,16 +1,9 @@
 {
-    "10.25.2.117": {
-        "hostname": "20241014040020",
-        "freeMemory": 11074748416,
-        "cpuCores": 4,
-        "diskFree": 160761470976,
-        "lastUpdate": 1739884007002
-    },
-    "10.25.1.90": {
-        "hostname": "20241014040020",
-        "freeMemory": 9437212672,
-        "cpuCores": 4,
-        "diskFree": 179107151872,
-        "lastUpdate": 1739884012075
+    "127.0.0.1": {
+        "hostname": "ryanp",
+        "freeMemory": 1552695296,
+        "cpuCores": 8,
+        "diskFree": 73913778176,
+        "lastUpdate": 1739925839131
     }
 }

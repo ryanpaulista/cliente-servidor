@@ -10,7 +10,7 @@
 
     <h1>Informações Coletadas</h1>
     
-    <main>
+    <main id="main">
 
 
 
@@ -23,7 +23,7 @@
                 const response = await fetch(('http://localhost:3000/api/info'));
                 const data = await response.json();
 
-                const container = document.getElementsByName('main');
+                const container = document.getElementById('main');
 
                 container.innerHTML = '';
 
@@ -36,7 +36,7 @@
                     
                         <h2>Computador: ${ip}</h2>
 
-                        <h3>Matrícula: ${hostname}</h3>
+                        <h3>Matrícula: ${computer.hostname}</h3>
 
                         <p>Memória RAM livre: ${computer.freeMemory}</p>
                         <p>Cores: ${computer.cpuCores}</p>
