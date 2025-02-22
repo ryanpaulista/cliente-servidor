@@ -17,48 +17,42 @@
     </main>
 
     <script>
+// Função para carregar e exibir as informações
+async function loadInfo() {
+        try {
+            const response = await fetch('http://localhost:3000/api/info');
+            if (!response.ok) {
+                throw new Error('Erro ao buscar dados da API');
+            }
+            const data = await response.json();
+            const container = document.getElementById('main');
+            container.innerHTML = ''; // Limpa o conteúdo anterior
 
-        async function loadInfo(){
-            try {
-                const response = await fetch(('http://localhost:3000/api/info'));
-                const data = await response.json();
-
-                const container = document.getElementById('main');
-
-                container.innerHTML = '';
-
-                Object.keys(data).forEach(ip => {
-                    const computer = data[ip];
-
-                    const computerInfo = `
-                    
+            // Itera sobre os dados e cria o HTML dinamicamente
+            Object.keys(data).forEach(ip => {
+                const computer = data[ip];
+                const computerInfo = `
                     <div>
-                    
                         <h2>Computador: ${ip}</h2>
-
                         <h3>Matrícula: ${computer.hostname}</h3>
-
                         <p>Memória RAM livre: ${computer.freeMemory}</p>
                         <p>Cores: ${computer.cpuCores}</p>
-                        <p>Mémoria de Disco livre: ${computer.diskFree}</p>
-                        
+                        <p>Memória de Disco livre: ${computer.diskFree}</p>
                     </div>
-                    
-                    `
-
-                    container.innerHTML+=computerInfo;
-
-                }) 
-
-            } catch (error) {
-                console.error('Erro ao carregar as informações!', error);
-                document.getElementsByName('main').innerHTML = '<p>Erro ao carregar os dados</p>';
-            }
-
+                `;
+                container.innerHTML += computerInfo;
+            });
+        } catch (error) {
+            console.error('Erro ao carregar as informações!', error);
+            document.getElementById('main').innerHTML = '<p>Erro ao carregar os dados</p>';
         }
+    }
 
-        loadInfo();
+    // Carrega as informações imediatamente ao abrir a página
+    loadInfo();
 
+    // Configura o polling para atualizar as informações a cada 5 segundos
+    setInterval(loadInfo, 5000); // 5000ms = 5 segundos
     </script>
 
 </body>

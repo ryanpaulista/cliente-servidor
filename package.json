@@ -3,5 +3,11 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "systeminformation": "^5.25.11"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "scripts": {
+    "start": "concurrently \"node server/Servidor.js\" \"node api/api.js\""
   }
 }

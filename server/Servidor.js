@@ -1,9 +1,10 @@
 const dgram = require("dgram");
 const fs = require("fs");
+const path = require("path")
 
 const PORT = 41234;
 const server = dgram.createSocket("udp4");
-const FILE_PATH = "clientes.json";
+const FILE_PATH = path.join(__dirname, "clientes.json");
 const TIMEOUT = 30000;
 
 let clients = {};

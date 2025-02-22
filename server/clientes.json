@@ -1,9 +1,9 @@
 {
     "127.0.0.1": {
         "hostname": "ryanp",
-        "freeMemory": 1552695296,
+        "freeMemory": 1149734912,
         "cpuCores": 8,
-        "diskFree": 73913778176,
-        "lastUpdate": 1739925839131
+        "diskFree": 78063849472,
+        "lastUpdate": 1740193860544
     }
 }
