@@ -19,6 +19,7 @@ async function getSystemInfo() {
             hostname: os.userInfo().username,
             freeMemory: os.freemem(),
             cpuCores: os.cpus().length,
+            temp: (await si.cpuTemperature()).main,
             diskFree: diskFreeGB, // Pega espaço disponível no primeiro disco, geralmente o disco C
         });
     } catch (error) {
