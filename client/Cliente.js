@@ -2,9 +2,9 @@ const dgram = require("dgram");
 const os = require("os");
 const si = require("systeminformation");
 
-const BROADCAST_ADDR = "0.0.0.0"; // 10.25.255.255 ip laboratório
+const BROADCAST_ADDR = "10.25.255.255"; // 10.25.255.255 ip laboratório
 const PORT = 41234;
-const INTERVAL = 15000; // Enviar a cada 10 segundos
+const INTERVAL = 15000; // Enviar a cada 15 segundos
 
 const client = dgram.createSocket("udp4");
 client.bind(() => {
